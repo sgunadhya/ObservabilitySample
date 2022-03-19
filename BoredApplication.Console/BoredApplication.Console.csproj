@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-BoredApplication-AD1EC9FC-4765-4218-80E4-E3859343869D</UserSecretsId>
+        <RootNamespace>BoredApplication</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

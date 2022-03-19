@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredApplication", "BoredApplication\BoredApplication.csproj", "{E24745FD-7E4E-49AA-83F2-B94809B44C46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredApplication.Console", "BoredApplication.Console\BoredApplication.Console.csproj", "{E24745FD-7E4E-49AA-83F2-B94809B44C46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoredClassLib", "BoredClassLib\BoredClassLib.csproj", "{3B755156-138F-4CA4-BE04-E5AC52FF56A9}"
 EndProject
