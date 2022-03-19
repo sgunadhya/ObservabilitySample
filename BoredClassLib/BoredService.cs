@@ -28,7 +28,8 @@ public class BoredService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        using (_source.CreateActivity("Calling BoredAPI", ActivityKind.Client))
+        string response;
+        using (_source.StartActivity("Calling BoredAPI", ActivityKind.Client))
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -37,8 +38,12 @@ public class BoredService : IHostedService
             HttpResponseMessage message = await httpClient.GetAsync(EndPoint);
             timer.Stop();
             _latency.Record(timer.ElapsedMilliseconds);
-            string response = await message.Content.ReadAsStringAsync();
+            response = await message.Content.ReadAsStringAsync();
             _logger.LogDebug($"Got message from API : {response}");
+        }
+
+        using (_source.StartActivity("Writing Response", ActivityKind.Producer))
+        {
             Bored? bored = JsonSerializer.Deserialize<Bored>(response);
             Console.WriteLine($"You can try this: {bored?.Activity} \n" +
                               $"which is an activity of type : {bored?.Type}, \n" +
@@ -46,7 +51,7 @@ public class BoredService : IHostedService
                               $"This will cost you : {bored?.Price} ");
         }
     }
-
+    
     public Task StopAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Stopping BoredService");
