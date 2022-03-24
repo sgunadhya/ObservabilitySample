@@ -8,9 +8,7 @@ namespace BoredClassLib;
 
 public class BoredService : IHostedService
 {
-    private const string EndPoint = "https://www.boredapi.com/api/activity";
-
-    private ActivitySource _source = new("BoredAPITracer");
+    private ActivitySource _source = new(Constants.TracerName);
 
     static Meter _meter = new("BoredAPIMeter");
 
@@ -35,7 +33,7 @@ public class BoredService : IHostedService
             timer.Start();
             _logger.LogInformation("Starting BoredService");
             HttpClient httpClient = _factory.CreateClient();
-            HttpResponseMessage message = await httpClient.GetAsync(EndPoint);
+            HttpResponseMessage message = await httpClient.GetAsync(Constants.EndPoint);
             timer.Stop();
             _latency.Record(timer.ElapsedMilliseconds);
             response = await message.Content.ReadAsStringAsync();
